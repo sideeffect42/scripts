@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+set -e
+
+fail() {
+	echo $* >&2
+	echo 'Abort.'
+	exit 1
+}
+
+require() {
+	local missing=()
+	for app in "$@"
+	do
+		which "$app" >/dev/null 2>&1 || missing+=( "$app" )
+	done
+
+	if [ 0 -lt ${#missing[@]} ]
+	then
+		echo "Missing required applications: " "${missing[@]}" >&2
+	fi
+
+	return ${#missing[@]}
+}
+
+
+require basename bundle jekyll readlink realpath
+
+
+[ 2 -eq $# ] || fail "Usage: ${0} <jekyll_blog> <deployment_target>"
+
+BLOGDIR="$(realpath "$1")"
+DEPLOYPATH="${2%/}" # Remove trailing slash added by autocomplete
+DEPLOYPATH="$(realpath -m -s "$2")"
+
+[ -d "$BLOGDIR" ] || fail "No Jekyll blog in ${BLOGDIR}"
+[ ! -e "$DEPLOYPATH" -o -h "$DEPLOYPATH" ] || fail "A file or directory already exists at ${DEPLOYPATH}. Cannot deploy to an existing directory."
+
+pushd "$BLOGDIR" >/dev/null
+
+echo '# bundle install'
+bundle install
+
+
+DEPLOYDIR="$(dirname "$DEPLOYPATH")"
+DEPLOYNAME=".$(basename "$DEPLOYPATH").deployment.$(date '+%y%m%d%H%M%S')"
+
+# Note: This readlink will exit non-zero on the first deployment
+ACTIVE_DEPLOYMENT="$(readlink -e "$DEPLOYPATH")" || true
+ACTIVE_DEPLOYNAME="$(basename "$ACTIVE_DEPLOYMENT")"
+
+[ "$ACTIVE_DEPLOYNAME" != "$DEPLOYNAME" ] || fail "Deployment directory collision!"
+
+DEPLOYDEST="${DEPLOYDIR}/${DEPLOYNAME}"
+
+echo -e "\n# building and deploying to ${DEPLOYDEST}..."
+bundle exec jekyll build -d "${DEPLOYDEST}"
+
+echo -e "\n# switching deployments"
+[ -h "$DEPLOYPATH" ] && rm "$DEPLOYPATH"
+ln -v -r -s "$DEPLOYDEST" "$DEPLOYPATH"
+
+if [ -e "$ACTIVE_DEPLOYMENT" ]
+then
+	echo -e "\n# deleting old deployment"
+	rm -R -f "$ACTIVE_DEPLOYMENT"
+fi
+
+popd >/dev/null

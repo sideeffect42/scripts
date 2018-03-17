@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+GIT_REPO="$(realpath .)"
+TMP_GIT_CLONE="$(mktemp -t jekyll-deploy-XXXXXXXX)"
+PUBLIC_WWW="/var/www/html"
+
+function cleanup {
+	[ -d "$TMP_GIT_CLONE" ] && rm -R -f "$TMP_GIT_CLONE"
+	[ -d "${GIT_REPO}/.sass-cache" ] && rm -R -f "${GIT_REPO}/.sass-cache"
+}
+trap cleanup EXIT
+
+git clone "$GIT_REPO" "$TMP_GIT_CLONE"
+
+deploy-blog "$TMP_GIT_CLONE" "$PUBLIC_WWW"
+
+# implicit cleanup
