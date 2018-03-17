@@ -63,7 +63,7 @@ ln -v -r -s "$DEPLOYDEST" "$DEPLOYPATH"
 if [ -e "$ACTIVE_DEPLOYMENT" ]
 then
 	echo -e "\n# deleting old deployment"
-	rm -R -f "$ACTIVE_DEPLOYMENT"
+	rm -R -f -v "$ACTIVE_DEPLOYMENT"
 fi
 
 popd >/dev/null
