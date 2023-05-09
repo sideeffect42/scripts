@@ -21,3 +21,10 @@ Random collection of shell scripts (of varying quality).
  * fully understand.
  */
 ```
+
+
+## XMPP client
+
+* Migration of chat history between accounts:
+
+  cf. [xmpp-client/migrate](xmpp-client/migrate).
