@@ -22,8 +22,18 @@ Random collection of shell scripts (of varying quality).
  */
 ```
 
+-----
 
-## XMPP client
+### Oinkoin
+
+Oinkoin is a flutter app for helping you managing your expenses. No internet required.
+[source code](https://github.com/emavgl/oinkoin)
+
+* Convert spending records from CSV to Oinkoin's JSON format:
+  [oinkoin/csv-to-oinkoin.py](oinkoin/csv-to-oinkoin.py).
+
+
+### XMPP client
 
 * Migration of chat history between accounts:
 
