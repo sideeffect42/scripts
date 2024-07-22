@@ -33,6 +33,16 @@ Oinkoin is a flutter app for helping you managing your expenses. No internet req
   [oinkoin/csv-to-oinkoin.py](oinkoin/csv-to-oinkoin.py).
 
 
+### Petitboot
+
+Scripts for the [Petitboot](https://open-power.github.io/petitboot/) bootloader.
+
+* Generate a `petitboot.conf` file from the files in the `/boot` directory
+  automatically:
+
+  cf. [petitboot/update-petitboot.sh](petitboot/README.update-petitboot.md)
+
+
 ### XMPP client
 
 * Migration of chat history between accounts:
