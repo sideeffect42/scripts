@@ -33,6 +33,15 @@ Oinkoin is a flutter app for helping you managing your expenses. No internet req
   [oinkoin/csv-to-oinkoin.py](oinkoin/csv-to-oinkoin.py).
 
 
+### OpenWrt
+
+Scripts for use with [OpenWrt](https://www.openwrt.org).
+
+* Automatic resizing of the root file system:
+
+  cf. [openwrt/resize.sh](openwrt/README.resize.md)
+
+
 ### Petitboot
 
 Scripts for the [Petitboot](https://open-power.github.io/petitboot/) bootloader.
