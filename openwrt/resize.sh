@@ -190,7 +190,7 @@ resize_ext4() {
 
 	command -v resize2fs >/dev/null 2>&1 || opkg_tmp_install resize2fs >&2 || return 2
 
-	fsck_ext4 "${fsdev}"
+	fsck_ext4 "${fsdev}" || return 1
 
 	resize2fs "${fsdev}" \
 	&& sync
@@ -201,16 +201,21 @@ fsck_f2fs() {
 
 	fsdev=${1:?}
 
-	# FIXME: untested!
-	return 7
-
 	command -v fsck.f2fs >/dev/null 2>&1 || opkg_tmp_install f2fsck >&2 || return 2
 
-	# try to fsck three times, sometimes it does not work on the succeed try
-	for _ in 1 2 3
-	do
-		fsck.f2fs -f -p "${fsdev}" && break
-	done
+	(
+		if grep -qF "${fsdev}" /proc/self/mounts
+		then
+			mount -o remount,ro "${fsdev}" || return 2
+			finally 'mount -o remount,rw "${fsdev}"'
+		fi
+
+		# try to fsck three times, sometimes it does not work on the succeed try
+		for _ in 1 2 3
+		do
+			fsck.f2fs -f "${fsdev}" && break
+		done
+	)
 }
 
 resize_f2fs() {
@@ -218,15 +223,20 @@ resize_f2fs() {
 
 	fsdev=${1:?}
 
-	# FIXME: untested!
-	return 7
+	command -v resize.f2fs >/dev/null 2>&1 || { opkg_tmp_install f2fsck >&2; ln -sf fsck.f2fs /tmp/usr/sbin/resize.f2fs; } || return 2
 
-	command -v resize.f2fs >/dev/null 2>&1 || opkg_tmp_install f2fsck >&2 || return 2
+	fsck_f2fs "${fsdev}" || return 1
 
-	fsck_f2fs "${fsdev}"
+	if grep -qF "${fsdev}" /proc/self/mounts
+	then
+		mount -o remount,ro "${fsdev}" || return 2
+	fi
 
-	resize.f2fs "${fsdev}" \
-	&& sync
+	resize.f2fs -f "${fsdev}" \
+	&& sync \
+	|| return 1
+
+	echo 'File system resized. Reboot the system to update the file system size.'
 }
 
 do_resize_partition() {
@@ -261,7 +271,10 @@ do_resize_filesystem() {
 				(ext4)
 					resize_ext4 "${dev}"
 					;;
-				(f2fs|*)
+				(f2fs)
+					resize_f2fs "${dev}"
+					;;
+				(*)
 					echo 'File system has an unsupported format.' >&2
 					return 1
 					;;
@@ -291,14 +304,17 @@ do_resize_filesystem() {
 					(ext4)
 						resize_ext4 "${loopdev}"
 						;;
-					(f2fs|*)
+					(f2fs)
+						resize_f2fs "${loopdev}"
+						;;
+					(*)
 						echo 'File system has an unsupported format.' >&2
 						return 1
 						;;
 				esac
-			) || return
+			)
 			;;
-	esac
+	esac || return
 
 	# XXX: needed?
 	mount_root done || :
