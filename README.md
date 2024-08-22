@@ -24,6 +24,14 @@ Random collection of shell scripts (of varying quality).
 
 -----
 
+
+### Dynamic DNS
+
+* Tiny PHP CGI script to monitor the current public IPv4 address of systems.
+
+  cf. [dyndns/dyn.php](dyndns/dyn.php)
+
+
 ### Oinkoin
 
 Oinkoin is a flutter app for helping you managing your expenses. No internet required.
