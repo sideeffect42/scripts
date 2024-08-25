@@ -60,6 +60,22 @@ Scripts for the [Petitboot](https://open-power.github.io/petitboot/) bootloader.
   cf. [petitboot/update-petitboot.sh](petitboot/README.update-petitboot.md)
 
 
+### TV7
+
+Scripts to use Init7's [TV7](https://www.init7.net/en/tv/tv7/) with your own 
+TV headend.
+
+* CLI to the TV7 API written in Python.
+
+  It supports:
+  * M3U playlist generation using both multicast and HLS URLs
+  * XMLTV generation
+
+  cf. [tv7/tv7.py](tv7/tv7.py)
+
+* Helper script to use tv7.py as an EPG source in [TVheadend](https://tvheadend.org/): [tv7/tv_grab_tv7](tv7/tv_grab_tv7)
+
+
 ### XMPP client
 
 * Migration of chat history between accounts:

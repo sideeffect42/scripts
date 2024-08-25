@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e -u
+
+
+case ${1-}
+in
+	(--description)
+		echo 'Grab EPG data from TV7API.'
+		exit 0
+		;;
+	(*)
+		exec nice -n 20 tv7.py xmltv -o - "$@"
+		;;
+esac
