@@ -60,6 +60,15 @@ Scripts for the [Petitboot](https://open-power.github.io/petitboot/) bootloader.
   cf. [petitboot/update-petitboot.sh](petitboot/README.update-petitboot.md)
 
 
+### SVN
+
+Scripts for the [Subversion](https://subversion.apache.org) version control
+system.
+
+* Rewrite the commit authors:
+
+  cf. [svn/update-authors.sh](svn/update-authors.sh)
+
 ### TV7
 
 Scripts to use Init7's [TV7](https://www.init7.net/en/tv/tv7/) with your own 
