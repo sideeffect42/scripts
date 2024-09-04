@@ -60,6 +60,15 @@ Scripts for the [Petitboot](https://open-power.github.io/petitboot/) bootloader.
   cf. [petitboot/update-petitboot.sh](petitboot/README.update-petitboot.md)
 
 
+### Redmine
+
+Scripts for the [Redmine](https://www.redmine.org) project management software.
+
+* Import issues from GitLab:
+
+  cf. [redmine/import-gitlab-issues.pl](redmine/import-gitlab-issues.pl)
+
+
 ### SVN
 
 Scripts for the [Subversion](https://subversion.apache.org) version control
