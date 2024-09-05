@@ -32,9 +32,14 @@ Scripts to manage or manipulate [awstats](https://www.awstats.org) data.
 * Render fresh HTML pages for all collected statistics data.
 
   cf. [awstats/render-stats.sh](awstats/render-stats.sh)
+
 * Update statistics with web server log files manually.
 
   cf. [awstats/load-logs.sh](awstats/load-logs.sh)
+
+* Merge and deduplicate Apache httpd log files.
+
+  cf. [awstats/merge-www-logs.sh](awstats/merge-www-logs.sh)
 
 
 ### diff
