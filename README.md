@@ -75,6 +75,14 @@ Scripts for use with [OpenWrt](https://www.openwrt.org).
   cf. [openwrt/resize.sh](openwrt/README.resize.md)
 
 
+### pass
+
+Extensions for the [pass](https://www.passwordstore.org) password manager.
+
+* Simple extension to help with TOTP-based two-factor authentication.
+
+  cf. [pass/2fa.bash](pass/2fa.bash)
+
 ### Petitboot
 
 Scripts for the [Petitboot](https://open-power.github.io/petitboot/) bootloader.
