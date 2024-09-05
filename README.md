@@ -25,6 +25,14 @@ Random collection of shell scripts (of varying quality).
 -----
 
 
+### diff
+
+* Generate a unified diff of two files, but show only differences matching a
+  given regular expression.
+
+  cf. [diff/diff-by-regex.py](diff/diff-by-regex.py)
+
+
 ### Dynamic DNS
 
 * Tiny PHP CGI script to monitor the current public IPv4 address of systems.
