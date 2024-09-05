@@ -72,7 +72,7 @@ Scripts for use with [OpenWrt](https://www.openwrt.org).
 
 * Automatic resizing of the root file system:
 
-  cf. [openwrt/resize.sh](openwrt/README.resize.md)
+  cf. [openwrt/growfs.sh](openwrt/README.growfs.md)
 
 
 ### pass
