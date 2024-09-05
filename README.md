@@ -25,6 +25,15 @@ Random collection of shell scripts (of varying quality).
 -----
 
 
+### awstats
+
+Scripts to manage or manipulate [awstats](https://www.awstats.org) data.
+
+* Render fresh HTML pages for all collected statistics data.
+
+  cf. [awstats/render-stats.sh](awstats/render-stats.sh)
+
+
 ### diff
 
 * Generate a unified diff of two files, but show only differences matching a
