@@ -83,6 +83,11 @@ Extensions for the [pass](https://www.passwordstore.org) password manager.
 
   cf. [pass/2fa.bash](pass/2fa.bash)
 
+* Extension to list the people who have access to a secret.
+
+  cf. [pass/who.bash](pass/who.bash)
+
+
 ### Petitboot
 
 Scripts for the [Petitboot](https://open-power.github.io/petitboot/) bootloader.
