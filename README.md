@@ -66,6 +66,19 @@ Oinkoin is a flutter app for helping you managing your expenses. No internet req
   [oinkoin/csv-to-oinkoin.py](oinkoin/csv-to-oinkoin.py).
 
 
+### OpenBMC
+
+Extensions for missing features in [OpenBMC](https://www.openbmc.org/)
+distributions:
+
+* [Talos II](https://www.raptorcs.com/TALOSII/):
+  * [openbmc/talos-ii/intrusion.sh](openbmc/talos-ii/intrusion.sh) -
+    script to check for case intrusions
+  * [openbmc/talos-ii/fpga-regs.sh](openbmc/talos-ii/fpga-regs.sh) -
+    script to read FPGA status registers (mostly ATX power supply, but als
+	bitstream version, VGA disable jumper)
+
+
 ### OpenWrt
 
 Scripts for use with [OpenWrt](https://www.openwrt.org).
